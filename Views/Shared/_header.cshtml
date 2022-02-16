@@ -1,0 +1,54 @@
+﻿<!-- header -->
+<div class="top-header-area" id="sticker">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 text-center">
+                <div class="main-menu-wrap">
+                    <!-- logo -->
+                    <div class="site-logo">
+                        <a href="index.html">
+                            <img src="../assets/img/logo.png" alt="">
+                        </a>
+                    </div>
+                    <!-- logo -->
+                    <!-- menu start -->
+                    <nav class="main-menu">
+                        <ul>
+                            <li class="current-list-item">
+                                <a asp-controller="Home" asp-action="Index">Trang chủ</a>
+
+                            </li>
+                            <li>
+                                <a asp-controller="Products" asp-action="Index">Shop</a>
+
+                            </li>
+                            <li>
+                                <div class="header-icons">
+                                    <a class="shopping-cart" asp-controller="Accounts" asp-action="Profile">
+                                        <i class="fas fa-user-circle"></i> Profile
+                                    </a>
+                                    <a class="shopping-cart" asp-controller="Carts" asp-action="Index"><i class="fas fa-shopping-cart"></i></a>
+                                    <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                    @if (ViewBag.Username != null)
+                                    {
+                                <a class="login-user" asp-controller="Accounts" asp-action="Logout">
+                                    <i class="fas fa-user"></i> Đăng Xuất
+                                </a> }
+                                            else
+                                            {
+                                <a class="login-user" asp-controller="Accounts" asp-action="Login">
+                                    <i class="fas fa-user"></i> Đăng nhập
+                                </a>}
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                    <div class="mobile-menu"></div>
+                    <!-- menu end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end header -->

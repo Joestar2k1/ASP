@@ -1,0 +1,175 @@
+﻿@model IEnumerable<FshopASP.Models.Cart>
+
+@{
+    ViewBag.title = "Kiểm tra thông tin";
+    Layout = "_LayoutTemplate";
+    int total(int price, int quantity)
+    {
+        return price * quantity;
+    }
+
+    int TotalBill()
+    {
+        int sum = 0;
+        foreach (var item in Model)
+        {
+            sum += item.Product.Price * item.Quantity;
+        }
+        return sum;
+    }
+
+}
+@section Top{
+    <partial name="_header" />
+}
+@section Bottom {
+    <partial name="_footer" />
+
+}
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>Fresh and Organic</p>
+                    <h1>Check Out Product</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<!-- check out section -->
+<div class="checkout-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="checkout-accordion-wrap">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card single-accordion">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Thông tin người dùng
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="billing-address-form">
+                                            @foreach (var item in Model)
+                                            {
+                                                <p><input asp-for="@item.Account.FullName" type="text" value="@item.Account.FullName"></p>
+                                                <p><input asp-for="@item.Account.Phone"type="tel"value="@item.Account.Phone"></p>
+                                                <p><input asp-for="@item.Account.Address"type="text" value="@item.Account.Address"></p>
+                                                break;
+                                            }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="card single-accordion">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                      Địa chỉ giao hàng
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="shipping-address-form" style="width:max-content">
+                                        <p><input type="text" value="@getAddress()"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="card single-accordion">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                       Phương thức thanh toán
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="card-details">
+                                        <p>Tiền mặt</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="order-details-wrap">
+                    <table class="order-details">
+                        <thead>
+                            <tr>
+                                <th>Đơn hàng của bạn</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody class="order-details-body">
+                            <tr>
+                                <td>Sản phẩm</td>
+                                <td>Tổng tiền</td>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Product.Name</td>
+                                    <td>$@total(item.Product.Price, item.Quantity)</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tbody class="checkout-details">
+                            <tr>
+                                <td>Tiền ship</td>
+                                <td>$0</td>
+                            </tr>
+                            <tr>
+                                <td>Tổng hóa đơn</td>
+                                <td>$@TotalBill()</td>
+                            </tr>
+                        </tbody>
+                    </table>                 
+                        <a class="boxed-btn" asp-controller="Carts" asp-action="PayCart" >Thanh toán</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end check out section -->
+<!-- logo carousel -->
+<div class="logo-carousel-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="logo-carousel-inner">
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/1.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/2.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/3.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/4.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/5.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end logo carousel -->
